@@ -7,7 +7,8 @@ import random
 from dotenv import load_dotenv
 
 load_dotenv()
-bot = commands.Bot(command_prefix='!')
+command_prefix = os.getenv('COMMAND_PREFIX')
+bot = commands.Bot(command_prefix=command_prefix)
 
 landingNumbers = [1,2,3,4,5,6]
 
@@ -35,7 +36,7 @@ async def on_ready():
 async def diceroll(ctx, subCommand: str=None):
   # Prints usage
   if subCommand is None:
-    await ctx.send('```\nUsage: !diceroll # \n\n[#] - can be 1 or 2 dice.\n```')
+    await ctx.send(f'```\nUsage: {command_prefix}diceroll # \n\n[#] - can be 1 or 2 dice.\n```')
     return
 
   # Roll 1 die
